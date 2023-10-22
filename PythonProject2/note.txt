@@ -1,0 +1,5 @@
+***********EMAIL SLICER***********
+
+collect email from user
+split the email using the @, the first part as the user name, the second part is gonna be saved as the domain
+split domain using . extension

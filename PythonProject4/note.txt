@@ -1,0 +1,117 @@
+pip3 install PyDictionary
+
+>>>
+
+
+
+
+from PyDictionary import PyDictionary
+from computerWords import computer_words, letters_are_in_word, calculate_points, is_word_duplicate
+import random, time, threading
+
+
+dictionary = PyDictionary()
+score = 0
+word_list = []
+start_time = time.time()
+max_duration = 5
+elapse_time = 0
+computer_input = random.choice(computer_words)
+
+while True:
+    elapsed_time = time.time() - start_time  # Calculate the elapsed time
+    
+    if elapsed_time >= max_duration:
+        print("Maximum time (60 seconds) reached. Stopping the loop.")
+        break
+
+    print(time.time())
+    print("\n{}".format(computer_input))
+
+    user_input = input("Enter a word: ").lower()
+
+    res = letters_are_in_word(computer_input, user_input)
+
+    if res == 1:
+        ras = dictionary.meaning(user_input)
+
+        if ras == 1:
+            if not is_word_duplicate(user_input, word_list):
+                word_point = calculate_points(user_input)
+                score += word_point
+                word_list.append(user_input)
+                print("[{}pt(s)]".format(word_point))
+
+
+
+print("\nTotal score: {}".format(score))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+if len(term.split()) > 1:
+            print("Error: A Term must be only a single word")
+        else:
+            try:
+                html = _get_soup_object("http://wordnetweb.princeton.edu/perl/webwn?s={0}".format(term))
+                types = html.findAll("h3")
+                if types:
+                    reg = str(html.find("ul"))
+                    meaning = re.findall(r'\((.*?)\)', reg)
+                    return meaning[0] if meaning else "No meaning found"
+                else:
+                    return "No meaning found"
+            except Exception as e:
+                if not disable_errors:
+                    print("Error: The Following Error occurred: %s" % e)
+                    return "Error occurred"
+
+
+
+@staticmethod
+    def meaning(term, disable_errors=False):
+        if len(term.split()) > 1:
+            print("Error: A Term must be only a single word")
+        else:
+            try:
+                html = _get_soup_object("http://wordnetweb.princeton.edu/perl/webwn?s={0}".format(
+                    term))
+                types = html.findAll("h3")
+                length = len(types)
+                lists = html.findAll("ul")
+                out = {}
+                for a in types:
+                    reg = str(lists[types.index(a)])
+                    meanings = []
+                    for x in re.findall(r'\((.*?)\)', reg):
+                        if 'often followed by' in x:
+                            pass
+                        elif len(x) > 5 or ' ' in str(x):
+                            meanings.append(x)
+                    name = a.text
+                    out[name] = meanings
+                return out
+            except Exception as e:
+                if disable_errors == False:
+                    print("Error: The Following Error occured: %s" % e)
