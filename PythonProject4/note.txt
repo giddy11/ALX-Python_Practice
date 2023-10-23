@@ -1,6 +1,9 @@
 pip3 install PyDictionary
+python -m pip install {package_name}
 
->>>
+
+**********BUG*************
+international-----on, all != al
 
 
 

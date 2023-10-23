@@ -7,11 +7,11 @@ dictionary = PyDictionary()
 score = 0
 word_list = []
 start_time = time.time()
-max_duration = 5000
+max_duration = 50
 elapse_time = 0
 computer_input = random.choice(computer_words)
 
-def user_input_thread(disable_errors=False):
+def user_input_thread():
     while time.time() - start_time < max_duration:
         global score
         elapsed_time = time.time() - start_time  # Calculate the elapsed time
